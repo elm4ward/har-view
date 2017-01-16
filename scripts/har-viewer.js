@@ -238,7 +238,7 @@
 
             $(html).insertBefore($('[data-id=summary]', element));
 
-            source = $('#' + id);
+            source = $('[data-id=' + id + ']');
             source.click(function (event) {
                var did = $(event.target).data(id)
                 if($('[data-id=' + did + ']', element).hasClass('plus')) {
