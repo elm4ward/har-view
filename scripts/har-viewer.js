@@ -98,7 +98,6 @@
         var totalReqSize = 0;
         var totalRespSize = 0;
         var totalTime = 0;
-        var idPrefix = options.idPrefix || '';
 
         this.render = function(har) {
             var that = this;
