@@ -240,15 +240,16 @@
 
             source = $('#' + id);
             source.click(function (event) {
-                if($('[data-id=' + event.target.id + ']', element).hasClass('plus')) {
-                    $('[data-id=' + event.target.id+ ']', element).removeClass('plus');
-                    $('[data-id=' + event.target.id+ ']', element).addClass('minus');
-                    $('[data-id=' + event.target.id + '-details]', element).show();
+               var did = $(event.target).data(id)
+                if($('[data-id=' + did + ']', element).hasClass('plus')) {
+                    $('[data-id=' + did + ']', element).removeClass('plus');
+                    $('[data-id=' + did + ']', element).addClass('minus');
+                    $('[data-id=' + did  + '-details]', element).show();
                 }
                 else {
-                    $('[data-id=' + event.target.id+ ']', element).removeClass('minus');
-                    $('[data-id=' + event.target.id+ ']', element).addClass('plus');
-                    $('[data-id=' + event.target.id + '-details]', element).hide();
+                    $('[data-id=' + did + ']', element).removeClass('minus');
+                    $('[data-id=' + did + ']', element).addClass('plus');
+                    $('[data-id=' + did + '-details]', element).hide();
                 }
             });
             $('[data-id=' + id + '-details]', element).hide();
