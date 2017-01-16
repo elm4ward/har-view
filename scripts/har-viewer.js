@@ -240,7 +240,7 @@
 
             source = $('[data-id=' + id + ']');
             source.click(function (event) {
-               var did = $(event.target).data(id)
+               var did = $(event.target).data('id')
                 if($('[data-id=' + did + ']', element).hasClass('plus')) {
                     $('[data-id=' + did + ']', element).removeClass('plus');
                     $('[data-id=' + did + ']', element).addClass('minus');
