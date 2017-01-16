@@ -313,7 +313,7 @@
                 headers: headers
             });
 
-            $('[data-id=' + id + (isRequest ? '-req-headers]' : '-resp-headers]')).append($(html));
+            $('[data-id=' + id + (isRequest ? '-req-headers]' : '-resp-headers]'), element).append($(html));
         }
 
         var _updateQueryString = function (id, queryString) {
