@@ -328,7 +328,7 @@
                 if(data.timings) {
                     var total = 0;
                     $.each(data.timings, function (key, value) {
-                        if(value > -1) {
+                        if(value > -1 && value != "") {
                             total += value;
                         }
                     });
