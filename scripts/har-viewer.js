@@ -339,7 +339,7 @@
 
                     var frac = 100 / totals[id];
                     $.each(data.timings, function (key, value) {
-                        var width = (value < 0) ? 0 : value;
+                        var width = (value < 0 || value = "") ? 0 : value;
                         if(width > 0) {
                             $('[data-id=' + id + '-' + key + ']', element).width(width * frac + '%');
                         }
