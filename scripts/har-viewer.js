@@ -165,7 +165,7 @@
         this.timings = function (id, timings) {
             var total = 0;
             $.each(timings, function (key, value) {
-                if(value > -1) {
+                if(value > -1 && value != "") {
                     total += value;
                 }
             });
