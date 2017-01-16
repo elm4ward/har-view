@@ -21,46 +21,46 @@
  */
 (function ($) {
     var HarView = function (element, options) {
-        var reqTemplate = "<div id='{{id}}-req' class='request'>\
-            <span class='plus' id='{{id}}'>&nbsp;&nbsp;&nbsp;</span>\
-            <span class='method' id='{{id}}-method'>{{request.method}}</span>\
-            <span class='url' id='{{id}}-url' title='{{request.url}}'>{{request.url}}</span>\
-            <span class='status' id='{{id}}-status'>{{response.status}}</span>\
-            <span class='statusText' id='{{id}}-statusText'>{{response.statusText}}</span>\
-            <span class='bodySize' id='{{id}}-bodySize'></span>\
-            <span><span class='time' id='{{id}}-time'>0</span> msec</span>\
-            <span class='timelineBar' id='{{id}}-timeline'></span>\
+        var reqTemplate = "<div data-id='{{id}}-req' class='request'>\
+            <span class='plus' data-id='{{id}}'>&nbsp;&nbsp;&nbsp;</span>\
+            <span class='method' data-id='{{id}}-method'>{{request.method}}</span>\
+            <span class='url' data-id='{{id}}-url' title='{{request.url}}'>{{request.url}}</span>\
+            <span class='status' data-id='{{id}}-status'>{{response.status}}</span>\
+            <span class='statusText' data-id='{{id}}-statusText'>{{response.statusText}}</span>\
+            <span class='bodySize' data-id='{{id}}-bodySize'></span>\
+            <span><span class='time' data-id='{{id}}-time'>0</span> msec</span>\
+            <span class='timelineBar' data-id='{{id}}-timeline'></span>\
         </div>";
-        var summaryTemplate = "<div id='summary' class='summary'>\
-            <span class='reqCount' id='reqCount'></span>\
-            <span class='reqSize' id='totalReqSize'></span>\
-            <span class='respSize' id='totalRespSize'></span>\
-            <span class='time' id='totalTime'></span>\
+        var summaryTemplate = "<div data-id='summary' class='summary'>\
+            <span class='reqCount' data-id='reqCount'></span>\
+            <span class='reqSize' data-id='totalReqSize'></span>\
+            <span class='respSize' data-id='totalRespSize'></span>\
+            <span class='time' data-id='totalTime'></span>\
         </div>";
 
-        var detailsTemplate = "<div class='details' id='{{id}}-details'>\
+        var detailsTemplate = "<div class='details' data-id='{{id}}-details'>\
             <td colspan='7'>\
-                <div id='{{id}}-tabs'>\
+                <div data-id='{{id}}-tabs'>\
                     <ul>\
                         <li><a href='#{{id}}-tab-0'>Headers</a></li>\
                         <li><a href='#{{id}}-tab-1'>Params</a></li>\
                         <li><a href='#{{id}}-tab-2'>Request</a></li>\
                         <li><a href='#{{id}}-tab-3'>Response</a></li>\
                     </ul>\
-                    <div id='{{id}}-tab-0'>\
+                    <div data-id='{{id}}-tab-0'>\
                         <p class='header'>Request headers</p>\
-                        <div id='{{id}}-req-headers'></div>\
+                        <div data-id='{{id}}-req-headers'></div>\
                         <p class='header'>Response headers</p>\
-                        <div id='{{id}}-resp-headers'></div>\
+                        <div data-id='{{id}}-resp-headers'></div>\
                     </div>\
-                    <div id='{{id}}-tab-1'>\
-                        <pre id='{{id}}-query-string' class='body'></pre>\
+                    <div data-id='{{id}}-tab-1'>\
+                        <pre data-id='{{id}}-query-string' class='body'></pre>\
                     </div>\
-                    <div id='{{id}}-tab-2'>\
-                        <pre id='{{id}}-req-body' class='body'></pre>\
+                    <div data-id='{{id}}-tab-2'>\
+                        <pre data-id='{{id}}-req-body' class='body'></pre>\
                     </div>\
-                    <div id='{{id}}-tab-3'>\
-                        <pre id='{{id}}-resp-body' class='body'></pre>\
+                    <div data-id='{{id}}-tab-3'>\
+                        <pre data-id='{{id}}-resp-body' class='body'></pre>\
                     </div>\
                 </div>\
             </td>\
@@ -75,14 +75,14 @@
             {{/headers}}\
         </table>";
 
-        var timingsTemplate = "<span id='{{id}}-lpad' class='timelinePad' style='width:{{timings._lpad}}%'></span><span\
-          id='{{id}}-blocked' class='timelineSlice timelineBlocked' style='width:{{timings.blocked}}%'></span><span\
-          id='{{id}}-dns' class='timelineSlice timelineDns' style='width:{{timings.dns}}%'></span><span\
-          id='{{id}}-connect' class='timelineSlice timelineConnect' style='width:{{timings.connect}}%'></span><span\
-          id='{{id}}-send' class='timelineSlice timelineSend' style='width:{{timings.send}}%'></span><span\
-          id='{{id}}-wait' class='timelineSlice timelineWait' style='width:{{timings.wait}}%'></span><span\
-          id='{{id}}-receive' class='timelineSlice timelineReceive' style='width:{{timings.receive}}%'></span><span\
-          id='{{id}}-rpad' class='timelinePad' style='width:{{timings._rpad}}%'></span>";
+        var timingsTemplate = "<span data-id='{{id}}-lpad' class='timelinePad' style='width:{{timings._lpad}}%'></span><span\
+          data-id='{{id}}-blocked' class='timelineSlice timelineBlocked' style='width:{{timings.blocked}}%'></span><span\
+          data-id='{{id}}-dns' class='timelineSlice timelineDns' style='width:{{timings.dns}}%'></span><span\
+          data-id='{{id}}-connect' class='timelineSlice timelineConnect' style='width:{{timings.connect}}%'></span><span\
+          data-id='{{id}}-send' class='timelineSlice timelineSend' style='width:{{timings.send}}%'></span><span\
+          data-id='{{id}}-wait' class='timelineSlice timelineWait' style='width:{{timings.wait}}%'></span><span\
+          data-id='{{id}}-receive' class='timelineSlice timelineReceive' style='width:{{timings.receive}}%'></span><span\
+          data-id='{{id}}-rpad' class='timelinePad' style='width:{{timings._rpad}}%'></span>";
 
         $(element).addClass('har');
         $(element).append($(summaryTemplate));
@@ -93,25 +93,27 @@
         var totals = {};
         var pads = {};
         var left, right;
-        var idctr = 0;
+
         var reqCount = 0;
         var totalReqSize = 0;
         var totalRespSize = 0;
         var totalTime = 0;
+        var idPrefix = options.idPrefix || '';
 
         this.render = function(har) {
             var that = this;
             var pageref;
+            var id = 0;
             $.each(har.log.entries, function (index, entry) {
                 pageref = pageref || entry.pageref;
                 if(entry.pageref === pageref) {
-                    that.entry(index, entry);
+                    that.entry(id, entry);
+                    id = id + 1;
                 }
             });
         }
 
         this.entry = function(id, entry) {
-            id = id || idctr++;
             log.entries[id] = entry;
             var t = new Date(entry.startedDateTime).getTime();
             if(left && right) {
@@ -134,7 +136,7 @@
         }
 
         this.request = function (id, request) {
-            if(!$('#' + id + '-req').html()) {
+            if(!$('[data-id=' + id + '-req]', element).html()) {
                 _render(id);
             }
             if(log.entries[id]) {
@@ -149,14 +151,14 @@
             _updateRequest(id, request);
 
             reqCount = reqCount + 1;
-            _updateField('#reqCount', reqCount + ((reqCount == 1) ?  ' request,' : ' requests,'));
+            _updateField('[data-id=reqCount]', reqCount + ((reqCount == 1) ?  ' request,' : ' requests,'));
             if(request.headersSize && request.headersSize > 0) {
                 totalReqSize = totalReqSize + request.headersSize;
             }
             if(request.bodySize && request.bodySize > 0) {
                 totalReqSize = totalReqSize + request.bodySize;
             }
-            _updateField('#totalReqSize', 'Total request ' + totalReqSize + ' bytes,');
+            _updateField('[data-id=totalReqSize]', 'Total request ' + totalReqSize + ' bytes,');
         };
 
         // left: min(startedDateTime)
@@ -168,9 +170,9 @@
                     total += value;
                 }
             });
-            _updateField('#' + id + '-time', total > -1 ? total : 0);
+            _updateField('[data-id=' + id + '-time]', total > -1 ? total : 0);
             totalTime = totalTime + total;
-            _updateField('#totalTime', totalTime + ' msec');
+            _updateField('[data-id=totalTime]', totalTime + ' msec');
 
             var data = log.entries[id];
             if(data) {
@@ -184,8 +186,8 @@
                     timings: timings,
                     id: id
                 });
-                $('#' + id + '-timeline').append($(html));
-                $('#' + id + '-timeline').attr('title', JSON.stringify(data.timings));
+                $('[data-id=' + id + '-timeline]', element).append($(html));
+                $('[data-id=' + id + '-timeline]', element).attr('title', JSON.stringify(data.timings));
 
                 _updateAllTimings();
 
@@ -207,7 +209,7 @@
                 if(response.bodySize && response.bodySize > 0) {
                     totalRespSize = totalRespSize + response.bodySize;
                 }
-                _updateField('#totalRespSize', 'Total response ' + totalRespSize + ' bytes');
+                _updateField('[data-id=totalRespSize]', 'Total response ' + totalRespSize + ' bytes');
             }
             else {
                 // Error otherwise
@@ -225,7 +227,7 @@
                 timings: timings
             });
 
-            $(html).insertBefore($('#summary'));
+            $(html).insertBefore($('[data-id=summary]', element));
 
             html = Mustache.to_html(detailsTemplate, {
                 id: id,
@@ -235,33 +237,33 @@
                 timings: timings
             });
 
-            $(html).insertBefore($('#summary'));
+            $(html).insertBefore($('[data-id=summary]', element));
 
             source = $('#' + id);
             source.click(function (event) {
-                if($('#' + event.target.id).hasClass('plus')) {
-                    $('#' + event.target.id).removeClass('plus');
-                    $('#' + event.target.id).addClass('minus');
-                    $('#' + event.target.id + '-details').show();
+                if($('[data-id=' + event.target.id + ']', element).hasClass('plus')) {
+                    $('[data-id=' + event.target.id+ ']', element).removeClass('plus');
+                    $('[data-id=' + event.target.id+ ']', element).addClass('minus');
+                    $('[data-id=' + event.target.id + '-details]', element).show();
                 }
                 else {
-                    $('#' + event.target.id).removeClass('minus');
-                    $('#' + event.target.id).addClass('plus');
-                    $('#' + event.target.id + '-details').hide();
+                    $('[data-id=' + event.target.id+ ']', element).removeClass('minus');
+                    $('[data-id=' + event.target.id+ ']', element).addClass('plus');
+                    $('[data-id=' + event.target.id + '-details]', element).hide();
                 }
             });
-            $('#' + id + '-details').hide();
+            $('[data-id=' + id + '-details]', element).hide();
 
             // Enable tabbed view
-            $('#' + id + '-tabs').tabs();
+            $('[data-id=' + id + '-tabs]', element).tabs();
 
         };
 
         var _updateRequest = function (id, request) {
-            _updateField('#' + id + '-method', request.method);
-            _updateField('#' + id + '-url', request.url);
-            $('#' + id + '-url').resizable({handles: 'e'});
-            $('#' + id + '-url').bind('resize', function (event, ui) {
+            _updateField('[data-id=' + id + '-method]', request.method);
+            _updateField('[data-id=' + id + '-url]', request.url);
+            $('[data-id=' + id + '-url]', element).resizable({handles: 'e'});
+            $('[data-id=' + id + '-url]', element).bind('resize', function (event, ui) {
                 $('.url').width(ui.size.width);
             });
 
@@ -272,37 +274,37 @@
                 _updateQueryString(id, request.queryString);
             }
             else {
-                $('#' + id + '-tabs').tabs('disable', 1);
+                $('[data-id=' + id + '-tabs]', element).tabs('disable', 1);
             }
             if(request.postData && request.postData.text) {
-                _updateField('#' + id + '-req-body', request.postData.text);
+                _updateField('[data-id=' + id + '-req-body]', request.postData.text);
             }
             else {
-                $('#' + id + '-tabs').tabs('disable', 2);
+                $('[data-id=' + id + '-tabs]', element).tabs('disable', 2);
             }
         };
 
         var _updateResponse = function (id, response) {
-            _updateField('#' + id + '-status', response.status);
+            _updateField('[data-id=' + id + '-status]', response.status);
             if(response.statusText) {
-                _updateField('#' + id + '-statusText', response.statusText);
+                _updateField('[data-id=' + id + '-statusText]', response.statusText);
             }
 
             if(response.headers) {
                 _updateHeaders(id, false, response.headers);
             }
             if(response.content && response.content.text) {
-                _updateField('#' + id + '-resp-body', response.content.text);
-                _updateField('#' + id + '-bodySize', response.bodySize);
+                _updateField('[data-id=' + id + '-resp-body]', response.content.text);
+                _updateField('[data-id=' + id + '-bodySize]', response.bodySize);
             }
             else {
-                $('#' + id + '-tabs').tabs('disable', 3);
+                $('[data-id=' + id + '-tabs]').tabs('disable', 3);
             }
         }
 
         var _updateField = function (id, field) {
             if(field) {
-                $(id).text(field);
+                $(id, element).text(field);
             }
         }
 
@@ -311,7 +313,7 @@
                 headers: headers
             });
 
-            $('#' + id + (isRequest ? '-req-headers' : '-resp-headers')).append($(html));
+            $('[data-id=' + id + (isRequest ? '-req-headers]' : '-resp-headers]')).append($(html));
         }
 
         var _updateQueryString = function (id, queryString) {
@@ -319,7 +321,7 @@
                 headers: queryString
             });
 
-            $('#' + id + '-query-string').append($(html));
+            $('[data-id=' + id + '-query-string]', element).append($(html));
         }
 
         var _updateAllTimings = function () {
@@ -340,14 +342,14 @@
                     $.each(data.timings, function (key, value) {
                         var width = (value < 0) ? 0 : value;
                         if(width > 0) {
-                            $('#' + id + '-' + key).width(width * frac + '%');
+                            $('[data-id=' + id + '-' + key + ']', element).width(width * frac + '%');
                         }
                         else {
-                            $('#' + id + '-' + key).css('border', 'none');
+                            $('[data-id=' + id + '-' + key+ ']', element).css('border', 'none');
                         }
                     });
-                    $('#' + id + '-lpad').width(pads[id][0] * frac + '%');
-                    $('#' + id + '-rpad').width(pads[id][1] * frac + '%');
+                    $('[data-id=' + id + '-lpad]', element).width(pads[id][0] * frac + '%');
+                    $('[data-id=' + id + '-rpad]', element).width(pads[id][1] * frac + '%');
                 }
             });
         }
